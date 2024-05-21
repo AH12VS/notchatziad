@@ -49,6 +49,7 @@ APPS = [
     "signin.apps.SigninConfig",
     "signout.apps.SignoutConfig",
     "signup.apps.SignupConfig",
+    "about.apps.AboutConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPS
