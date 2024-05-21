@@ -50,6 +50,7 @@ APPS = [
     "signout.apps.SignoutConfig",
     "signup.apps.SignupConfig",
     "about.apps.AboutConfig",
+    "copyr.apps.CopyrConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPS

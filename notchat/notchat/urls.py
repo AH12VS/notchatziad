@@ -8,4 +8,5 @@ urlpatterns = [
     path("signout/", include("signout.urls", "signout")),
     path("signup/", include("signup.urls", "signup")),
     path("about/", include("about.urls", "about")),
+    path("copyr/", include("copyr.urls", "copyr")),
 ]
