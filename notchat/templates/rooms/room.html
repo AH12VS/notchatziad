@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title_block %}
-  Room
+  Room | {{ room.name }}
 {% endblock %}
 
 {% block head_block %}
@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body_block %}
-  <h2 class="shadow p-3 mb-5 rounded">Room</h2>
+  <h2 class="shadow p-3 mb-5 rounded">{{ room.name }}</h2>
 
   <div class="room-area-container p-1 rounded" style="background: #7f66c5;">
     <div class="rooms-container">

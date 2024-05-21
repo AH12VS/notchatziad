@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 class RoomModel(models.Model):
@@ -40,3 +41,6 @@ class RoomModel(models.Model):
         )
 
         super(RoomModel, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("rooms:room_page", args=[self.slug])

@@ -5,5 +5,5 @@ app_name = "rooms"
 
 urlpatterns = [
     path("", rooms_view, name="rooms_page"),
-    path("room/", room_view, name="room_page"),
+    path("room/<slug>", room_view, name="room_page"),
 ]
