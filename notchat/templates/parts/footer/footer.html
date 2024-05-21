@@ -14,13 +14,13 @@
         <a href="#" class="nav-link px-2 text-muted">Account</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">Signup</a>
+        <a href="{% url 'signin:signin_page' %}" class="nav-link px-2 text-muted">SignIn</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">Login</a>
+        <a href="{% url 'signup:signup_page' %}" class="nav-link px-2 text-muted">SignUp</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">Logout</a>
+        <a href="{% url 'signout:signout_page' %}" class="nav-link px-2 text-muted">SignOut</a>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link px-2 text-muted">About</a>

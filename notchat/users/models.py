@@ -52,8 +52,17 @@ class UserModelManager(BaseUserManager):
 
 
 class UserModel(AbstractBaseUser):
-    email = models.EmailField(verbose_name="ایمیل", max_length=250, unique=True)
-    username = models.CharField(verbose_name="نام کاربری", max_length=250)
+    email = models.EmailField(
+        verbose_name="ایمیل",
+        max_length=250,
+        unique=True,
+    )
+    username = models.CharField(
+        verbose_name="نام کاربری",
+        max_length=250,
+        blank=True,
+        null=True,
+    )
     img_prof = models.ImageField(
         verbose_name="عکس",
         upload_to="img/users/",

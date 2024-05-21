@@ -1,0 +1,45 @@
+{% extends 'parts/base/base.html' %}
+
+{% load static %}
+
+{% block title_block %}
+  SignUp
+{% endblock %}
+
+{% block head_block %}
+
+{% endblock %}
+
+{% block body_block %}
+  <div class="login-div">
+    {% include 'parts/alerts/alerts.html' %}
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputUserName" class="form-label">User Name</label>
+        <input type="text" class="form-control" name="username" id="exampleInputUserName" />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" name="passwd" id="exampleInputPassword1" />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" name="confirm_passwd" id="exampleInputPassword2" />
+      </div>
+
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-primary btn-sm purple-custom-btn shadow p-3 mb-5 rounded">SignUp</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

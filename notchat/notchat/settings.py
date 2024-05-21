@@ -2,6 +2,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from django.contrib import messages
 
 # ========== ENDIMPORTS ========== #
 
@@ -45,6 +46,9 @@ DJANGO_APPS = [
 APPS = [
     "users.apps.UsersConfig",
     "home.apps.HomeConfig",
+    "signin.apps.SigninConfig",
+    "signout.apps.SignoutConfig",
+    "signup.apps.SignupConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPS
@@ -133,6 +137,17 @@ USE_I18N = True
 
 USE_TZ = True
 # ========== ENDINTERNATIONALIZATION ========== #
+
+
+# ========== MESSAGES ========== #
+MESSAGE_TAGS = {
+    messages.DEBUG: "alert-info",
+    messages.INFO: "alert-info",
+    messages.SUCCESS: "alert-success",
+    messages.WARNING: "alert-warning",
+    messages.ERROR: "alert-danger",
+}
+# ========== ENDMESSAGES ========== #
 
 
 # ========== USER ========== #
