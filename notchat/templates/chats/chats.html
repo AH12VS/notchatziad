@@ -1,0 +1,25 @@
+{% extends 'parts/base/base.html' %}
+
+{% load static %}
+
+{% block title_block %}
+  Chats
+{% endblock %}
+
+{% block head_block %}
+
+{% endblock %}
+
+{% block body_block %}
+  <h2 class="shadow p-3 mb-5 rounded">Chats</h2>
+
+  <div class="d-inline-block card shadow-lg p-3 mb-5 bg-body rounded m-3" style="width: 240px; overflow: hidden; background-color: #7f66c5 !important;">
+    <div class="card-body">
+      <h3 class="card-title"><b>Chat Title</b></h3>
+      <h6 class="card-subtitle mb-2">Chat Desc</h6>
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <a href="{% url 'chats:chat_page' %}" class="btn btn-primary purple-custom-btn shadow-lg p-3 rounded" style="background-color: #8f80d4;">Join</a>
+    </div>
+  </div>
+{% endblock %}
