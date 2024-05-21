@@ -51,6 +51,7 @@ APPS = [
     "signup.apps.SignupConfig",
     "about.apps.AboutConfig",
     "copyr.apps.CopyrConfig",
+    "errhandlers.apps.ErrhandlersConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPS

@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 
+handler404 = "errhandlers.views.err_404_view"
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("home.urls", "home")),
@@ -9,4 +11,5 @@ urlpatterns = [
     path("signup/", include("signup.urls", "signup")),
     path("about/", include("about.urls", "about")),
     path("copyr/", include("copyr.urls", "copyr")),
+    path("err/", include("errhandlers.urls", "errhandlers")),
 ]
