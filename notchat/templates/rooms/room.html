@@ -13,54 +13,103 @@
 {% block body_block %}
   <h2 class="shadow p-3 mb-5 rounded">{{ room.name }}</h2>
 
-  <div class="room-area-container p-1 rounded" style="background: #7f66c5;">
-    <div class="rooms-container">
-      <div class="m-5 border border-1 rounded" style="border-color: #6750a4;" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header" style="background: #d2d2f3;">
-          <img src="..." class="rounded me-2" alt="..." />
-          <strong class="me-auto">Bootstrap</strong>
-          <small class="text-muted">just now</small>
+  <div class="room-area-container p-1 rounded" id="room-area-container-id" style="background: #7f66c5;">
+    
+    <div id="room-chats-container" style="height: 65vh; overflow-y: auto;">
+      
+      {% for message in messages %}
+        <div class="rooms-container">
+          <div class="m-5 border border-1 rounded" style="border-color: #6750a4;" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header" style="background: #d2d2f3;">
+              {% if message.user.img_prof %}
+                <img src="{{ message.user.img_prof.url }}" alt="user image profile alt" class="rounded border" style="width: 24px; height: 24px; vertical-align: -moz-middle-with-baseline; margin-right: 4px;" />
+              {% endif %}
+              <strong class="me-auto">{{message.user}}</strong>
+              <small class="text-muted">{{message.created|timesince}}</small>
+            </div>
+            <div class="toast-body" style="background-color: #e6e6f9; color: #323232; margin-top: -1px;">{{message.content}}</div>
+          </div>
         </div>
-        <div class="toast-body" style="background-color: #e6e6f9; color: #323232; margin-top: -1px;">See? Just like this.</div>
-      </div>
-    </div>
+      {% endfor %}
 
-    <div class="rooms-container">
-      <div class="m-5 border border-1 rounded" style="border-color: #6750a4;" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header" style="background: #d2d2f3;">
-          <img src="..." class="rounded me-2" alt="..." />
-          <strong class="me-auto">Bootstrap</strong>
-          <small class="text-muted">just now</small>
-        </div>
-        <div class="toast-body" style="background-color: #e6e6f9; color: #323232; margin-top: -1px;">See? Just like this.</div>
-      </div>
-    </div>
-
-    <div class="rooms-container">
-      <div class="m-5 border border-1 rounded" style="border-color: #6750a4;" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header" style="background: #d2d2f3;">
-          <img src="..." class="rounded me-2" alt="..." />
-          <strong class="me-auto">Bootstrap</strong>
-          <small class="text-muted">just now</small>
-        </div>
-        <div class="toast-body" style="background-color: #e6e6f9; color: #323232; margin-top: -1px;">See? Just like this.</div>
-      </div>
-    </div>
-
-    <div class="rooms-container">
-      <div class="m-5 border border-1 rounded" style="border-color: #6750a4;" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header" style="background: #d2d2f3;">
-          <img src="..." class="rounded me-2" alt="..." />
-          <strong class="me-auto">Bootstrap</strong>
-          <small class="text-muted">just now</small>
-        </div>
-        <div class="toast-body" style="background-color: #e6e6f9; color: #323232; margin-top: -1px;">See? Just like this.</div>
-      </div>
     </div>
 
     <div class="input-group mt-5">
-      <input style="background: #d2d2f3;" type="text" class="form-control" placeholder="Message" aria-label="Message" aria-describedby="button-addon2" />
+      <input style="background: #d2d2f3;" type="text" class="form-control" id="user-msg-inp" placeholder="Message" aria-label="Message" aria-describedby="button-addon2" />
       <button class="shadow btn btn-primary purple-custom-btn p-2 rounded mr-3" type="button" id="button-addon2">Send</button>
     </div>
   </div>
+{% endblock %}
+
+{% block script_block %}
+  {{ room.slug|json_script:'json-roomname' }}
+  {{ request.user.email|json_script:'json-user-email' }}
+
+  <script>
+    const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
+    const userEmail = JSON.parse(document.getElementById('json-user-email').textContent);
+    
+    const ChatSocket = new WebSocket('ws://' + window.location.host + '/ws/' + roomName + '/');
+    
+    ChatSocket.onmessage = function (e) {
+      console.log('onmessage');
+
+      const data = JSON.parse(e.data);
+
+      if (data.message) {
+        let html = '<div class="rooms-container">';
+        html += '<div class="m-5 border border-1 rounded" style="border-color: #6750a4;" role="alert" aria-live="assertive" aria-atomic="true">';
+        html += '<div class="toast-header" style="background: #d2d2f3;">';
+        html += '{% if message.user.img_prof %}'
+        html += '<img src="{{ message.user.img_prof.url }}" alt="user image profile alt" class="rounded border" style="width: 24px; height: 24px; vertical-align: -moz-middle-with-baseline; margin-right: 4px;" />'
+        html += '{% endif %}'
+        html += '<strong class="me-auto">' + data.useremail + '</strong>';
+        html += '<small class="text-muted">{{message.created|timesince}}</small>'
+        html += '</div>';
+        html += '<div class="toast-body" style="background-color: #e6e6f9; color: #323232; margin-top: -1px;">' + data.message + '</div>';
+        html += '</div>';
+        html += '</div>';
+
+        document.querySelector("#room-chats-container").innerHTML += html;
+
+        scroll_to_bottom();
+      } 
+    }
+    
+    ChatSocket.onclose = function (e) {
+      console.log('onclose');
+    }
+    
+    //
+    
+    document.querySelector('#button-addon2').onclick = function (e) {
+      e.preventDefault();
+
+      const messageInputDom = document.querySelector('#user-msg-inp');
+      const message = messageInputDom.value;
+    
+      ChatSocket.send(
+        JSON.stringify({
+          "message": message,
+          "useremail": userEmail,
+          "room": roomName
+        })
+      )
+
+      messageInputDom.value = "";
+
+      return false;
+    }
+
+    //
+
+    function scroll_to_bottom() {
+      const object_div = document.querySelector("#room-chats-container")
+      object_div.scrollTop = object_div.scrollHeight;
+    }
+
+    // scroll to bottom when get into app
+    scroll_to_bottom()
+
+  </script>
 {% endblock %}

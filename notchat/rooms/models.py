@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
+from users.models import UserModel
 
 
 class RoomModel(models.Model):
@@ -44,3 +45,23 @@ class RoomModel(models.Model):
 
     def get_absolute_url(self):
         return reverse("rooms:room_page", args=[self.slug])
+
+
+class MessageModel(models.Model):
+    room = models.ForeignKey(
+        RoomModel,
+        related_name="messages",
+        on_delete=models.CASCADE,
+    )
+    user = models.ForeignKey(
+        UserModel,
+        related_name="user",
+        on_delete=models.CASCADE,
+    )
+    content = models.TextField()
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    class Meta:
+        ordering = ("created",)

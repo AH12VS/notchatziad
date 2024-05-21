@@ -40,6 +40,10 @@ DJANGO_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    #
+    "daphne",
+    "channels",
+    #
     "django.contrib.staticfiles",
 ]
 
@@ -99,6 +103,16 @@ TEMPLATES = [
 # ========== WSGI ========== #
 WSGI_APPLICATION = "notchat.wsgi.application"
 # ========== ENDWSGI ========== #
+
+
+# ========== ASGI ========== #
+ASGI_APPLICATION = "notchat.asgi.application"
+# ========== ENDASGI ========== #
+
+
+# ========== CHANNEL ========== #
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
+# ========== ENDCHANNEL ========== #
 
 
 # ========== DB ========== #
@@ -168,8 +182,8 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 
 # ========== MEDIA ========== #
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # ========== ENDMEDIA ========== #
 
 

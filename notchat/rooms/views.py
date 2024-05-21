@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import RoomModel
+from .models import RoomModel, MessageModel
 
 
 def rooms_view(request):
@@ -20,9 +20,12 @@ def room_view(request, slug):
         return redirect("home:home_page")
 
     room = get_object_or_404(RoomModel, slug=slug)
+    # messages = room.messages[0:30]
+    messages = MessageModel.objects.filter(room=room)
 
     context = {
         "room": room,
+        "messages": messages
     }
 
     return render(request, "rooms/room.html", context)

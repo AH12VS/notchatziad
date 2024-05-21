@@ -20,13 +20,12 @@
     {% comment %}END loader{% endcomment %}
 
     <link rel="stylesheet" href="{% static 'styles/parts/base/base.css' %}" />
-    
+
     {% comment %}loader{% endcomment %}
     <script src="{% static 'scripts/bootstrap/lib/v5/scripts.js' %}"></script>
     <link rel="stylesheet" href="{% static 'styles/bootstrap/lib/v5/styles.css' %}" />
     {% comment %}loader{% endcomment %}
-    
-    
+
     {% block head_block %}
 
     {% endblock %}
@@ -48,5 +47,9 @@
 
       {% include 'parts/footer/footer.html' %}
     </div>
+
+    {% block script_block %}
+
+    {% endblock %}
   </body>
 </html>
