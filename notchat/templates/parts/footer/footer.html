@@ -10,18 +10,23 @@
       <li class="nav-item">
         <a href="#" class="nav-link px-2 text-muted">Home</a>
       </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-muted">Account</a>
-      </li>
-      <li class="nav-item">
-        <a href="{% url 'signin:signin_page' %}" class="nav-link px-2 text-muted">SignIn</a>
-      </li>
-      <li class="nav-item">
-        <a href="{% url 'signup:signup_page' %}" class="nav-link px-2 text-muted">SignUp</a>
-      </li>
-      <li class="nav-item">
-        <a href="{% url 'signout:signout_page' %}" class="nav-link px-2 text-muted">SignOut</a>
-      </li>
+
+      {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">Account</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'signout:signout_page' %}" class="nav-link px-2 text-muted">SignOut</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a href="{% url 'signin:signin_page' %}" class="nav-link px-2 text-muted">SignIn</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'signup:signup_page' %}" class="nav-link px-2 text-muted">SignUp</a>
+        </li>
+      {% endif %}
+
       <li class="nav-item">
         <a href="#" class="nav-link px-2 text-muted">About</a>
       </li>

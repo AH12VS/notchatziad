@@ -13,27 +13,37 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item border-bottom" href="#">Account</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'signin:signin_page' %}">SignIn</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'signup:signup_page' %}">SignUp</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'signout:signout_page' %}">SignOut</a>
-            </li>
+            {% if request.user.is_authenticated %}
+              <li>
+                <a class="dropdown-item border-bottom" href="#">Account</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'signout:signout_page' %}">SignOut</a>
+              </li>
+            {% else %}
+              <li>
+                <a class="dropdown-item" href="{% url 'signin:signin_page' %}">SignIn</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'signup:signup_page' %}">SignUp</a>
+              </li>
+            {% endif %}
+
             <li>
               <a class="dropdown-item border-top" href="#">About</a>
             </li>
           </ul>
         </li>
         {% if request.user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="#">{{ request.user }}</a>
-          </li>
+          {% if request.user.username %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">{{ request.user.username }}</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">{{ request.user }}</a>
+            </li>
+          {% endif %}
         {% endif %}
       </ul>
       <form class="d-flex">
