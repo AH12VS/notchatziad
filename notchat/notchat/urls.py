@@ -14,7 +14,7 @@ urlpatterns = [
     path("about/", include("about.urls", "about")),
     path("copyr/", include("copyr.urls", "copyr")),
     path("err/", include("errhandlers.urls", "errhandlers")),
-    path("chats/", include("chats.urls", "chats")),
+    path("rooms/", include("rooms.urls", "rooms")),
     path("users/", include("users.urls", "users")),
 ]
 

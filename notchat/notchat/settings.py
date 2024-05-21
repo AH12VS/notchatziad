@@ -52,7 +52,7 @@ APPS = [
     "about.apps.AboutConfig",
     "copyr.apps.CopyrConfig",
     "errhandlers.apps.ErrhandlersConfig",
-    "chats.apps.ChatsConfig",
+    "rooms.apps.RoomsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPS
