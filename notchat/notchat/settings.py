@@ -44,6 +44,7 @@ DJANGO_APPS = [
 
 APPS = [
     "users.apps.UsersConfig",
+    "home.apps.HomeConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPS

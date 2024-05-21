@@ -10,5 +10,7 @@ notchat/logs/
 
 notchat/media/
 
+notchat/static/mmd/
+
 notchat/db.sqlite3
 notchat/.env

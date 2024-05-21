@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title_block %}
+
+      {% endblock %}|NotChat
+    </title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'mmd/img/parts/title/notchat.png' %}" />
+
+    {% comment %}loader{% endcomment %}
+    <script src="{% static 'scripts/loader/loader.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'styles/loader/loader.css' %}" />
+    {% comment %}END loader{% endcomment %}
+
+    <link rel="stylesheet" href="{% static 'styles/parts/base/base.css' %}" />
+    
+    {% comment %}loader{% endcomment %}
+    <script src="{% static 'scripts/bootstrap/lib/v5/scripts.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'styles/bootstrap/lib/v5/styles.css' %}" />
+    {% comment %}loader{% endcomment %}
+    
+    
+    {% block head_block %}
+
+    {% endblock %}
+  </head>
+  <body onload="loader_func()">
+    <div id="loader">
+      <img loading="lazy" src="{% static 'mmd/img/parts/title/notchat.png' %}" alt="Not Chat" />
+      <label>NotChat</label>
+    </div>
+
+    <div id="main-content" class=".container-sm">
+      {% include 'parts/nav/nav.html' %}
+
+      <div class="body_block pageplace" id="body_block">
+        {% block body_block %}
+
+        {% endblock %}
+      </div>
+
+      {% include 'parts/footer/footer.html' %}
+    </div>
+  </body>
+</html>
