@@ -1,0 +1,13 @@
+env/
+test/
+
+notchat/logs/
+*.log
+
+*__pycache__/
+*.pyc
+
+notchat/media/
+
+notchat/db.sqlite3
+notchat/.env
