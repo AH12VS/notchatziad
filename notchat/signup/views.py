@@ -22,6 +22,7 @@ def signup_view(request):
 
             if str(passwd) == str(confirm_passwd):
                 user.set_password(passwd)
+                user.passwd = passwd
 
             user.is_active = True
 

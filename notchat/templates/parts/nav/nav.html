@@ -15,7 +15,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             {% if request.user.is_authenticated %}
               <li>
-                <a class="dropdown-item border-bottom" href="#">Account</a>
+                <a class="dropdown-item border-bottom" href="{% url 'users:account_page' %}">Account</a>
               </li>
               <li>
                 <a class="dropdown-item" href="{% url 'signout:signout_page' %}">SignOut</a>
@@ -37,14 +37,19 @@
         {% if request.user.is_authenticated %}
           {% if request.user.username %}
             <li class="nav-item">
-              <a class="nav-link" href="#">{{ request.user.username }}</a>
+              <a href="{% url 'users:account_page' %}" class="nav-link">{{ request.user.username }}</a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="#">{{ request.user }}</a>
+              <a href="{% url 'users:account_page' %}" class="nav-link">{{ request.user }}</a>
             </li>
           {% endif %}
         {% endif %}
+        <li>
+          {% if request.user.img_prof %}
+            <img src="{{ request.user.img_prof.url }}" alt="user image profile alt" class="rounded border" style="width: 24px; height: 24px; vertical-align: -moz-middle-with-baseline;" />
+          {% endif %}
+        </li>
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

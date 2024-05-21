@@ -1,0 +1,54 @@
+{% extends 'parts/base/base.html' %}
+
+{% load static %}
+
+{% block title_block %}
+  Account | {{ request.user }}
+{% endblock %}
+
+{% block head_block %}
+
+{% endblock %}
+
+{% block body_block %}
+  <div class="login-div">
+    {% include 'parts/alerts/alerts.html' %}
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ request.user.email }}" disabled />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputUserName" class="form-label">User Name</label>
+        {% if request.user.username == None %}
+          <input type="text" class="form-control" name="username" id="exampleInputUserName" value="" />
+        {% else %}
+          <input type="text" class="form-control" name="username" id="exampleInputUserName" value="{{ request.user.username }}" />
+        {% endif %}
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" name="passwd" id="exampleInputPassword1" value="{{ request.user.passwd }}" />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" name="confirm_passwd" id="exampleInputPassword2" value="{{ request.user.passwd }}" />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputImage" class="form-label">Image Profile</label>
+        <input type="file" class="form-control" name="img_prof" id="exampleInputImage" />
+      </div>
+
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-primary btn-sm purple-custom-btn shadow p-3 mt-5 rounded">Change</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

@@ -120,7 +120,7 @@ class UserModel(AbstractBaseUser):
             hasher = identify_hasher(self.password)
         except:
             self.set_password(self.passwd)
-            self.passwd = ""
+            # self.passwd = ""
 
         super(UserModel, self).save(*args, **kwargs)
 
