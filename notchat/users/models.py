@@ -12,6 +12,7 @@ class UserModelManager(BaseUserManager):
         self,
         password,
         email="",
+        username="",
         passwd="",
     ):
         # check email if its empty or not
@@ -21,6 +22,7 @@ class UserModelManager(BaseUserManager):
         #
         user = self.model(
             email=self.normalize_email(email),
+            username=username,
             passwd=passwd,
         )
         # user.set_password(password)
@@ -31,12 +33,14 @@ class UserModelManager(BaseUserManager):
     def create_superuser(
         self,
         password,
-        email="",
+        email,
+        username="",
         passwd="",
     ):
         user = self.create_user(
-            email,
-            password,
+            email=email,
+            password=password,
+            username=username,
             passwd=f"{passwd}{password}",
         )
         user.is_active = True
@@ -70,7 +74,6 @@ class UserModel(AbstractBaseUser):
     is_active = models.BooleanField(verbose_name="فعال", default=False)
     is_staff = models.BooleanField(verbose_name="کارمند", default=False)
     is_superuser = models.BooleanField(verbose_name="سوپریوزر", default=False)
-    is_cms_user = models.BooleanField(verbose_name="کاربر سی ام اس", default=False)
     # end default django user fields
 
     # check for signup
@@ -100,7 +103,8 @@ class UserModel(AbstractBaseUser):
 
     # show first part of email (-> before @)
     def __str__(self):
-        return self.username
+        return str(self.email).split("@")[0]
+        # return self.username
 
     def save(self, *args, **kwargs):
         try:
