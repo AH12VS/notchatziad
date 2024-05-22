@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
 from users.models import UserModel
+from .per_2_ascii import per_2_ascii
 
 
 class RoomModel(models.Model):
@@ -36,7 +37,7 @@ class RoomModel(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = (
-            slugify(self.name, allow_unicode=True)
+            slugify(per_2_ascii(self.name), allow_unicode=True)
             + "-"
             + str(slugify(self.slug_time, allow_unicode=True)).replace("-", "")
         )
