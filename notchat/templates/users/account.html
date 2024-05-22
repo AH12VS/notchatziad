@@ -43,6 +43,9 @@
 
       <div class="mb-3">
         <label for="exampleInputImage" class="form-label">Image Profile</label>
+        {% if request.user.img_prof %}
+          <img src="{{ request.user.img_prof.url }}" alt="user image profile alt" class="rounded border" style="width: 24px; height: 24px; vertical-align: -moz-middle-with-baseline;" />
+        {% endif %}
         <input type="file" class="form-control" name="img_prof" id="exampleInputImage" />
       </div>
 
