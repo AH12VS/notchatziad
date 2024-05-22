@@ -16,6 +16,7 @@ urlpatterns = [
     path("err/", include("errhandlers.urls", "errhandlers")),
     path("rooms/", include("rooms.urls", "rooms")),
     path("users/", include("users.urls", "users")),
+    path("search/", include("search.urls", "search")),
 ]
 
 if settings.DEBUG:

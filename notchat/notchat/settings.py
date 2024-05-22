@@ -57,6 +57,7 @@ APPS = [
     "copyr.apps.CopyrConfig",
     "errhandlers.apps.ErrhandlersConfig",
     "rooms.apps.RoomsConfig",
+    "search.apps.SearchConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPS
