@@ -1,0 +1,4 @@
+ADMINUSER = {
+    "USERNAME": "admin@admin.admin",
+    "PASSWD": "adminpa33",
+}
