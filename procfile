@@ -1,0 +1,1 @@
+web: gunicorn notchat/notchat/asgi.py --log-file
